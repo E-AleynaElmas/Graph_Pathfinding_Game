@@ -157,7 +157,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.8460308, g: 0.8254717, b: 1, a: 1}
+  m_BackGroundColor: {r: 0.8460308, g: 0.8254717, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -214,6 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1298464268}
   - component: {fileID: 1298464267}
+  - component: {fileID: 1298464269}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -230,11 +231,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1298464266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5d6449ead8076647bbeea6ceb7f00d3, type: 3}
+  m_Script: {fileID: 11500000, guid: c8fdfe606c8e1c340a80af690fca3931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nodePrefab: {fileID: 7238239472251459237, guid: 9d3be5d291fbf5e479ff7b977ae6cb3f,
     type: 3}
+  graphObjectsList: []
 --- !u!4 &1298464268
 Transform:
   m_ObjectHideFlags: 0
@@ -249,3 +251,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1298464269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298464266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b408709bdd80ea4f941b4c9a95d7461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
