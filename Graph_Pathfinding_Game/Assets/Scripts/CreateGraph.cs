@@ -8,7 +8,10 @@ public class CreateGraph : MonoBehaviour
 
     public GameObject nodePrefab;
     public Graph<Vector2> graph = new Graph<Vector2>();
+    public GameObject lastNode;
 
+    private List<GameObject> graphObjList = new List<GameObject>();
+   
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -22,6 +25,8 @@ public class CreateGraph : MonoBehaviour
     void Start()
     {
         Create();
+        SetDeActive();
+        lastNode = graph.Nodes[graph.Count - 1].Obj();
     }
 
     private void Draw()
@@ -51,8 +56,9 @@ public class CreateGraph : MonoBehaviour
 
                 lineObj.transform.parent = obj.transform;
 
-
             }
+            node.SetObj(obj);
+            graphObjList.Add(obj);
             obj.transform.parent = transform;
             LineColorEdit(obj);
         }
@@ -87,6 +93,44 @@ public class CreateGraph : MonoBehaviour
             LineRenderer rend = node.gameObject.transform.GetChild(i).GetComponent<LineRenderer>();           
             rend.startColor = randomColor;
             rend.endColor = randomColor;
+        }
+    }
+
+    private void SetDeActive()
+    {
+        graphObjList[0].SetActive(true);
+
+        for (int i = 0; i < graphObjList[0].transform.childCount; i++)
+        {
+            GameObject child = graphObjList[0].transform.GetChild(i).gameObject;
+            child.SetActive(false);
+        }
+
+        for (int i = 1; i < graphObjList.Count; i++)
+        {
+            graphObjList[i].SetActive(false);
+            for (int j = 0; j < graphObjList[i].transform.childCount; j++)
+            {
+                GameObject child = graphObjList[i].transform.GetChild(j).gameObject;
+                child.SetActive(false);
+            }
+        }
+    }
+
+    public void Restart()
+    {
+        ClickDetection.clickCounter = 0;
+        Clear();
+        graphObjList.Clear();
+        graph.Clear();
+        Start();
+    }
+
+    private void Clear()
+    {
+        for(int i = 0; i < graphObjList.Count; i++)
+        {
+            Destroy(graphObjList[i]);
         }
     }
 

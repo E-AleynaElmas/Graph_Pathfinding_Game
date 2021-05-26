@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Graph<T>
 {
-    List<GraphNode<T, GameObject>> nodes = new List<GraphNode<T, GameObject>>();
+    List<GraphNode<T>> nodes = new List<GraphNode<T>>();
 
     public Graph(){}
 
@@ -13,14 +13,14 @@ public class Graph<T>
         get { return nodes.Count; }
     }
 
-    public List<GraphNode<T, GameObject>> Nodes
+    public List<GraphNode<T>> Nodes
     {
         get { return nodes; }
     }
 
     public void Clear()
     {
-        foreach(GraphNode<T, GameObject> node in nodes)
+        foreach(GraphNode<T> node in nodes)
         {
             node.RemoveAllNeighbors();
         }
@@ -39,12 +39,12 @@ public class Graph<T>
         }
         else
         {
-            nodes.Add(new GraphNode<T, GameObject>(value));
+            nodes.Add(new GraphNode<T>(value));
             return true;
         }
     }
 
-    public bool AddEdge(GraphNode<T, GameObject> node1, GraphNode<T, GameObject> node2)
+    public bool AddEdge(GraphNode<T> node1, GraphNode<T> node2)
     {
         if(node1 == null || node2 == null)
         {
@@ -64,7 +64,7 @@ public class Graph<T>
 
     public bool RemoveNode(T value)
     {
-        GraphNode<T, GameObject> removeNode = Find(value);
+        GraphNode<T> removeNode = Find(value);
         if(removeNode == null)
         {
             return false;
@@ -72,7 +72,7 @@ public class Graph<T>
         else
         {
             nodes.Remove(removeNode);
-            foreach(GraphNode<T, GameObject> node in nodes)
+            foreach(GraphNode<T> node in nodes)
             {
                 node.RemoveNeighbor(removeNode);
             }
@@ -82,8 +82,8 @@ public class Graph<T>
 
     public bool RemoveEdges(T value1, T value2)
     {
-        GraphNode<T, GameObject> node1 = Find(value1);
-        GraphNode<T, GameObject> node2 = Find(value2);
+        GraphNode<T> node1 = Find(value1);
+        GraphNode<T> node2 = Find(value2);
 
         if (node1 == null || node2 == null)
         {
@@ -101,9 +101,9 @@ public class Graph<T>
         }
     }
 
-    public GraphNode<T, GameObject> Find(T value)
+    public GraphNode<T> Find(T value)
     {
-        foreach(GraphNode <T, GameObject> node in nodes)
+        foreach(GraphNode <T> node in nodes)
         {
             if (node.Value.Equals(value))
             {

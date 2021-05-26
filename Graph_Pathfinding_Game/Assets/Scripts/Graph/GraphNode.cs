@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class GraphNode<T, GameObject>
+public class GraphNode<T>
 {
     T value;
     GameObject obj;
-    List<GraphNode<T, GameObject>> neighbors;
+    List<GraphNode<T>> neighbors;
 
     public GraphNode(T value)
     {
         this.value = value;
-        neighbors = new List<GraphNode<T, GameObject>>();
+        neighbors = new List<GraphNode<T>>();
     }
     
     public T Value
@@ -25,12 +24,27 @@ public class GraphNode<T, GameObject>
         this.obj = obj;
     }
 
-    public List<GraphNode<T, GameObject>> Neighbors
+    public GameObject Obj()
+    {
+        return obj; 
+    }
+
+    public List<GameObject> NeighborsObj()
+    {
+        List<GameObject> neighborsObj = new List<GameObject>();
+        for (int i = 0; i < neighbors.Count; i++)
+        {
+            neighborsObj.Add(neighbors[i].obj);
+        }
+        return neighborsObj;
+    }
+
+    public List<GraphNode<T>> Neighbors
     {
         get { return neighbors; }
     }
 
-    public bool AddNeighbor (GraphNode<T, GameObject> neighbor)
+    public bool AddNeighbor (GraphNode<T> neighbor)
     {
         if (neighbors.Contains(neighbor))
         {
@@ -43,7 +57,7 @@ public class GraphNode<T, GameObject>
         }
     }
 
-    public bool RemoveNeighbor(GraphNode<T, GameObject> neighbor)
+    public bool RemoveNeighbor(GraphNode<T> neighbor)
     {
         return neighbors.Remove(neighbor);
     }

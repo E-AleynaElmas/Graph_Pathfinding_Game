@@ -6,6 +6,13 @@ public class GameController : MonoBehaviour
 {
     public delegate void OnClickListener(Vector2 position);
 
+    public Graph<Vector2> graph;
+
+    void Start()
+    {
+        graph = CreateGraph.Instance.graph;
+    }
+
     private void OnEnable()
     {
         ClickDetection.Click += OnClick;
@@ -17,18 +24,16 @@ public class GameController : MonoBehaviour
 
     private void OnClick(Vector2 position)
     {
-        graph.Find(position);
+        List<GameObject> neighbors = graph.Find(new Vector2(position.x, position.y)).NeighborsObj();
+        SetActiveNeighbors(neighbors);
         Debug.Log("Click" + position.x+ ","+position.y);
     }
 
-    public Graph<Vector2> graph;
-    void Start()
+    private void SetActiveNeighbors(List<GameObject> neighbors)
     {
-        graph = CreateGraph.Instance.graph;
-    }
-
-    void Update()
-    {
-        
-    }
+        for(int i = 0; i < neighbors.Count; i++)
+        {
+            neighbors[i].gameObject.SetActive(true);
+        }
+    }    
 }
