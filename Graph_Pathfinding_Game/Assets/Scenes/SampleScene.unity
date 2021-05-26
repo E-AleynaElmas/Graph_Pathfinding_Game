@@ -777,6 +777,7 @@ MonoBehaviour:
   nodePrefab: {fileID: 7238239472251459237, guid: 9d3be5d291fbf5e479ff7b977ae6cb3f,
     type: 3}
   lastNode: {fileID: 0}
+  nodeCount: 20
 --- !u!4 &1298464268
 Transform:
   m_ObjectHideFlags: 0

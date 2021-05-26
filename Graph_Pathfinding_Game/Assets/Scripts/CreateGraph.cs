@@ -10,8 +10,14 @@ public class CreateGraph : MonoBehaviour
     public Graph<Vector2> graph = new Graph<Vector2>();
     public GameObject lastNode;
 
+    [SerializeField]
+    int nodeCount = 20;
+
+    int maxNeighborCount = 3;
+    int desiredNeighborCount = 2;
+
     private List<GameObject> graphObjList = new List<GameObject>();
-   
+    private int neighborsCounter;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -66,7 +72,7 @@ public class CreateGraph : MonoBehaviour
 
     private void Create()
     {
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < nodeCount; i++)
         {
             float x = Random.Range(-2, 2);
             float y = Random.Range(-4, 4);
@@ -75,11 +81,20 @@ public class CreateGraph : MonoBehaviour
 
         for (int i = 0; i < graph.Count; i++)
         {
-            int rnd = Random.Range(2, 3);
-            for (int j = 0; j < rnd; j++)
+            int rnd = desiredNeighborCount;
+
+            neighborsCounter = 0;
+            while (graph.Nodes[i].Neighbors.Count < rnd && neighborsCounter < nodeCount)
             {
-                graph.AddEdge(graph.Nodes[i], graph.Nodes[Random.Range(0, graph.Nodes.Count)]);
+                var node = graph.Nodes[Random.Range(0, graph.Nodes.Count)];
+                neighborsCounter++;
+                if (node.Neighbors.Count < maxNeighborCount)
+                {
+                    graph.AddEdge(graph.Nodes[i], node);
+
+                }
             }
+
         }
 
         Draw();

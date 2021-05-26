@@ -71,6 +71,7 @@ public class Graph<T>
         }
         else
         {
+            //önce komşuları gez sonra kendini sil
             nodes.Remove(removeNode);
             foreach(GraphNode<T> node in nodes)
             {
